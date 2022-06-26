@@ -5,11 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SecurityLab1"
         mc:Ignorable="d"
-        Title="Activation" Height="200" Width="400" Background="LightGray" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Activation" Height="470" Width="700" Background="LightGray" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <Label  HorizontalAlignment="Center" FontSize="25" FontWeight="Bold" Margin="15">Activation</Label>
-        <Label  HorizontalAlignment="Center" FontSize="14" FontWeight="SemiBold" Margin="0 65 0 0" >Enter activation code</Label>
-        <PasswordBox Height="20" Width="140" Margin="0 40 0 0" HorizontalContentAlignment="Center" x:Name="passwordField"></PasswordBox>
-        <Button Height="20" Width="60" Margin="0 90 0 0" x:Name="submitButton" Click="submitButton_Click">Submit</Button>
+        <Label  HorizontalAlignment="Center" FontSize="35" FontWeight="Bold" Margin="0,15,0,0">Activation</Label>
+        <Label  HorizontalAlignment="Center" FontSize="24" FontWeight="SemiBold" Margin="0,60,0,0" >Enter activation code</Label>
+        <PasswordBox Height="25" Width="260" Margin="0, -190,0,0" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="passwordField"></PasswordBox>
+        <Label  HorizontalAlignment="Center" FontSize="24" FontWeight="SemiBold" Margin="0,140,0,0" >Complete the CAPTCHA</Label>
+        <Image x:Name="captchaImage" Margin="0, 85,0,0" Height="137" MouseLeftButtonDown="changeImage_Click"></Image>
+        <Label  HorizontalAlignment="Center" FontSize="10" Margin="0,322,0,0" >Click picture to change</Label>
+        <TextBox Height="25" Width="260" Margin="0,280,0,0" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="captchaField"></TextBox>
+        <Button Height="30" Width="250" Margin="0,370,0,0" FontSize="15" FontWeight="SemiBold" x:Name="submitButton" Click="submitButton_Click">Submit</Button>
     </Grid>
 </Window>

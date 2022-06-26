@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using SecurityLab1.FilePropertiesTool;
+using System.Linq;
 
 namespace SecurityLab1
 {
@@ -138,11 +139,12 @@ namespace SecurityLab1
 
         private void activate_Click(object sender, RoutedEventArgs e)
         {
-            var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "Activation.json");
+            var path = "Activation.json";
             var activation = JsonSerializer.Deserialize<Activation>(File.ReadAllText(path));
 
             if (!activation.IsActivated)
             {
+                if (!Application.Current.Windows.OfType<ActivationWindow>().Any())
                 new ActivationWindow().Show();
             }
             else
@@ -159,7 +161,8 @@ namespace SecurityLab1
         #region LocalMethods
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "Activation.json");
+
+            var path = "Activation.json";
             var activation = JsonSerializer.Deserialize<Activation>(File.ReadAllText(path));
 
             if (_changed)
@@ -208,12 +211,9 @@ namespace SecurityLab1
             }
             if (_changed)
             {
-                var rawFileName = fileName.Text.Remove(fileName.Text.Length - 1);
+                File.WriteAllText(_filePath, new TextRange(workSpace.Document.ContentStart, workSpace.Document.ContentEnd).Text);
 
-                var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, rawFileName);
-                File.WriteAllText(path, new TextRange(workSpace.Document.ContentStart, workSpace.Document.ContentEnd).Text);
-
-                fileName.Text = rawFileName;
+                fileName.Text = fileName.Text.Remove(fileName.Text.Length - 1);
                 _changed = false;
             }
         }
@@ -289,7 +289,8 @@ namespace SecurityLab1
                       MessageBoxImage.Question);
 
             if (activate == MessageBoxResult.Yes)
-                new ActivationWindow().Show();
+                if (!Application.Current.Windows.OfType<ActivationWindow>().Any())
+                    new ActivationWindow().Show();
         }
     }
     #endregion

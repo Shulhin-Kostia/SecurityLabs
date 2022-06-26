@@ -23,12 +23,10 @@ namespace SecurityLab1
         {
             bool result = Vigenere.Encode(password, KeyWord) == Password;
 
-            Console.WriteLine(Vigenere.Encode(password, KeyWord));
-
             if (result == true)
             {
                 IsActivated = true;
-                var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "Activation.json");
+                var path = "Activation.json";
                 File.WriteAllText(path, JsonSerializer.Serialize(this));
             }
 
